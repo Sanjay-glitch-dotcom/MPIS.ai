@@ -1,0 +1,17 @@
+# Environments
+.env
+
+# Python/Django
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+*.sqlite3
+db.sqlite3
+
+# Logs
+*.log
+
+# Media files
+media/
