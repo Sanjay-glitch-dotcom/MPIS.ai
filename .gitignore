@@ -1,0 +1,22 @@
+# Environments
+Backend/venv/
+Frontend/node_modules/
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+
+# Django specific
+Backend/db.sqlite3
+Backend/media/
+Backend/.env
+
+# Node caches
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# System files
+.DS_Store
+Thumbs.db
