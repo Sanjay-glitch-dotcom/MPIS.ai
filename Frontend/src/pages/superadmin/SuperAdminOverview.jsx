@@ -54,7 +54,7 @@ const SuperAdminOverview = () => {
 
   const statCards = [
     { title: 'Total Cases', value: stats.total_cases, icon: ShieldAlert, color: 'text-purple-500', bg: 'bg-purple-500/10', border: 'border-purple-500/20' },
-    { title: 'Total Users', value: stats.total_citizens + stats.total_family, icon: Users, color: 'text-blue-500', bg: 'bg-blue-500/10', border: 'border-blue-500/20' },
+    { title: 'Total Users', value: stats.total_public, icon: Users, color: 'text-blue-500', bg: 'bg-blue-500/10', border: 'border-blue-500/20' },
     { title: 'Active Server Load', value: 'Normal', icon: Server, color: 'text-green-500', bg: 'bg-green-500/10', border: 'border-green-500/20' },
     { title: 'System Audits', value: 'Secure', icon: Activity, color: 'text-emerald-500', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20' },
   ];

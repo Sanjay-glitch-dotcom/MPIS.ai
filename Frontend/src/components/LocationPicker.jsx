@@ -165,7 +165,7 @@ export default function LocationPicker({ onConfirm, onCancel }) {
 
         {/* Map Area */}
         <div className="flex-1 relative bg-slate-900">
-          <MapContainer center={[position.lat, position.lng]} zoom={5} className="w-full h-full">
+          <MapContainer center={[position.lat, position.lng]} zoom={5} minZoom={3} className="w-full h-full" maxBounds={[[-90, -180], [90, 180]]}>
             <MapController center={[position.lat, position.lng]} />
             
             <LayersControl position="topright">
@@ -174,18 +174,21 @@ export default function LocationPicker({ onConfirm, onCancel }) {
                   attribution='&copy; <a href="https://www.esri.com/">Esri</a>'
                   url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
                   maxZoom={19}
+                  noWrap={true}
                 />
               </LayersControl.BaseLayer>
               <LayersControl.BaseLayer name="Dark Map">
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                   url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+                  noWrap={true}
                 />
               </LayersControl.BaseLayer>
               <LayersControl.BaseLayer name="Street Map">
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  noWrap={true}
                 />
               </LayersControl.BaseLayer>
             </LayersControl>

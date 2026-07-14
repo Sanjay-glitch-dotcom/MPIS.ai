@@ -3,15 +3,14 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     ROLE_CHOICES = (
-        ('FAMILY', 'Family Member'),
-        ('CITIZEN', 'Citizen'),
+        ('PUBLIC', 'Public User'),
         ('POLICE', 'Police Officer'),
         ('SUB_POLICE', 'Sub Police Officer'),
         ('ADMIN', 'Administrator'),
         ('SUB_ADMIN', 'Sub Admin'),
         ('SUPERADMIN', 'Super Admin'),
     )
-    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='CITIZEN')
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='PUBLIC')
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     created_by = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='subordinates')
     force_password_change = models.BooleanField(default=False)

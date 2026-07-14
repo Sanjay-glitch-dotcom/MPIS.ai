@@ -283,7 +283,7 @@ const Settings = () => {
         </motion.div>
 
         {/* Danger Zone Section */}
-        {(user?.role === 'CITIZEN' || user?.role === 'FAMILY_MEMBER') && (
+        {(user?.role === 'PUBLIC') && (
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

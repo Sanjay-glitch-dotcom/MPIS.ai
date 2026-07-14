@@ -51,10 +51,11 @@ const GeoSpatialMap = ({
 }) => {
   return (
     <div className="h-64 w-full rounded-xl overflow-hidden border border-slate-700/50 relative z-0">
-      <MapContainer center={center} zoom={zoom} scrollWheelZoom={true} style={{ height: '100%', width: '100%' }}>
+      <MapContainer center={center} zoom={zoom} minZoom={3} scrollWheelZoom={true} style={{ height: '100%', width: '100%' }} maxBounds={[[-90, -180], [90, 180]]}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          noWrap={true}
         />
         {selectable && <MapEvents onLocationSelect={onLocationSelect} />}
         

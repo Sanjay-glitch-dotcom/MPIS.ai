@@ -13,7 +13,7 @@ const Register = () => {
     confirm_password: '',
     first_name: '',
     last_name: '',
-    role: 'CITIZEN',
+    role: 'PUBLIC',
     phone_number: ''
   });
   
@@ -124,14 +124,14 @@ const Register = () => {
             <ShieldCheck className="w-8 h-8 text-white" />
           </motion.div>
           <h2 className="text-3xl font-black text-white tracking-tight mb-2">Join the Grid</h2>
-          <p className="text-slate-400 font-light">Step {step} of 3: {step === 1 ? 'Personal Intel' : step === 2 ? 'Security Clearance' : 'Agent Role'}</p>
+          <p className="text-slate-400 font-light">Step {step} of 2: {step === 1 ? 'Personal Intel' : 'Security Clearance'}</p>
         </div>
 
         {/* Progress Bar */}
         <div className="w-full bg-slate-900 rounded-full h-1.5 mb-8 overflow-hidden">
           <motion.div 
             initial={{ width: '0%' }}
-            animate={{ width: `${(step / 3) * 100}%` }}
+            animate={{ width: `${(step / 2) * 100}%` }}
             className="bg-primary h-1.5 shadow-[0_0_10px_rgba(220,38,38,1)] transition-all duration-500"
           />
         </div>
@@ -147,7 +147,7 @@ const Register = () => {
           </motion.div>
         )}
         
-        <form onSubmit={step === 3 ? handleSubmit : (e) => e.preventDefault()} className="relative flex flex-col min-h-[360px]">
+        <form onSubmit={step === 2 ? handleSubmit : (e) => e.preventDefault()} className="relative flex flex-col min-h-[360px]">
           <AnimatePresence mode="wait">
             
             {/* STEP 1: Personal Details */}
@@ -226,34 +226,6 @@ const Register = () => {
                 </div>
               </motion.div>
             )}
-
-            {/* STEP 3: Role Selection */}
-            {step === 3 && (
-              <motion.div key="step3" variants={stepVariants} initial="hidden" animate="visible" exit="exit" className="space-y-6 pt-4">
-                <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-white">Select Your Designation</h3>
-                  <p className="text-sm text-slate-400 mt-2 font-light">This defines your clearance level in the system.</p>
-                </div>
-                
-                <div className="grid grid-cols-2 gap-4">
-                  <div 
-                    onClick={() => setFormData({...formData, role: 'CITIZEN'})}
-                    className={`cursor-pointer border-2 rounded-xl p-5 flex flex-col items-center justify-center gap-3 transition-all ${formData.role === 'CITIZEN' ? 'border-primary bg-primary/10 shadow-[0_0_20px_rgba(220,38,38,0.2)]' : 'border-slate-800 bg-black/40 hover:border-slate-600'}`}
-                  >
-                    <UserIcon className={`w-8 h-8 ${formData.role === 'CITIZEN' ? 'text-primary' : 'text-slate-500'}`} />
-                    <span className={`text-xs font-bold uppercase tracking-widest ${formData.role === 'CITIZEN' ? 'text-white' : 'text-slate-400'}`}>Citizen</span>
-                  </div>
-                  
-                  <div 
-                    onClick={() => setFormData({...formData, role: 'FAMILY'})}
-                    className={`cursor-pointer border-2 rounded-xl p-5 flex flex-col items-center justify-center gap-3 transition-all ${formData.role === 'FAMILY' ? 'border-blue-500 bg-blue-500/10 shadow-[0_0_20px_rgba(59,130,246,0.2)]' : 'border-slate-800 bg-black/40 hover:border-slate-600'}`}
-                  >
-                    <ShieldCheck className={`w-8 h-8 ${formData.role === 'FAMILY' ? 'text-blue-500' : 'text-slate-500'}`} />
-                    <span className={`text-xs font-bold uppercase tracking-widest ${formData.role === 'FAMILY' ? 'text-white' : 'text-slate-400'}`}>Family Member</span>
-                  </div>
-                </div>
-              </motion.div>
-            )}
           </AnimatePresence>
 
           {/* Navigation Buttons */}
@@ -264,7 +236,7 @@ const Register = () => {
               </button>
             ) : <div></div>}
 
-            {step < 3 ? (
+            {step < 2 ? (
               <button type="button" onClick={nextStep} className="flex items-center text-xs font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl transition-all shadow-[0_0_15px_rgba(220,38,38,0.3)] hover:shadow-[0_0_25px_rgba(220,38,38,0.5)]">
                 Continue <ArrowRight className="w-4 h-4 ml-2" />
               </button>

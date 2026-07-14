@@ -448,14 +448,14 @@ class MatchViewSet(viewsets.ModelViewSet):
         user = self.request.user
         if user.role in ['ADMIN', 'SUPERADMIN', 'POLICE', 'SUB_ADMIN', 'SUB_POLICE']:
             return Match.objects.all().order_by('-created_at')
-        elif user.role == 'FAMILY':
-            # Family can only see matches for their reported missing persons
+        elif user.role == 'PUBLIC':
+            # Public users can only see matches for their reported missing persons (Context-based)
             return Match.objects.filter(missing_person__reported_by=user).order_by('-created_at')
         return Match.objects.none()
 
     def update(self, request, *args, **kwargs):
         # Allow officials to update status
-        if request.user.role in ['FAMILY', 'CITIZEN']:
+        if request.user.role == 'PUBLIC':
             return Response({'detail': 'Not permitted'}, status=status.HTTP_403_FORBIDDEN)
         return super().update(request, *args, **kwargs)
 
@@ -464,7 +464,7 @@ class MatchViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['post'], permission_classes=[permissions.IsAuthenticated])
     def review(self, request, pk=None):
-        if request.user.role in ['FAMILY', 'CITIZEN']:
+        if request.user.role == 'PUBLIC':
             return Response({'detail': 'Not permitted'}, status=status.HTTP_403_FORBIDDEN)
 
         match = self.get_object()
@@ -612,8 +612,7 @@ class AdminAnalyticsView(APIView):
             'total_sightings': Sighting.objects.count(),
             'pending_matches': Match.objects.filter(status='PENDING').count(),
             'verified_matches': Match.objects.filter(status='VERIFIED').count(),
-            'total_citizens': User.objects.filter(role='CITIZEN', is_active=True).count(),
-            'total_family': User.objects.filter(role='FAMILY', is_active=True).count(),
+            'total_public': User.objects.filter(role='PUBLIC', is_active=True).count(),
         })
 
 class MissingPersonImageViewSet(viewsets.ModelViewSet):
