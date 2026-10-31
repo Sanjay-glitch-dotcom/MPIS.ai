@@ -1,26 +1,64 @@
-# Environments
+# Environments & Dependencies
 Backend/venv/
 Frontend/node_modules/
+node_modules/
+venv/
+env/
+.venv/
 
-# Python caches
+# Python caches & bytecode
 __pycache__/
-*.pyc
-*.pyo
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
 
-# Django specific
+# Database & Uploaded Media
 Backend/db.sqlite3
 Backend/media/
-Backend/.env
+db.sqlite3
+*.sqlite3
 
-# Node caches
+# Environment files & Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+
+# Frontend build artifacts
+Frontend/dist/
+dist/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-# System files
+# Application & Server Logs
+*.log
+
+# Operating System & IDEs
 .DS_Store
 Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
 
-# Agent/AI Configuration
+# Notebooks & Scratch diagrams
+*.ipynb
+*.drawio
+
+# AI / Agent workspace metadata
 .agent/
 .gemini/
+
+# LaTeX Auxiliary & Paper Build Artifacts
+*.aux
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
