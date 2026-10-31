@@ -26,7 +26,7 @@ Locating missing individuals in crowded urban environments is a time-critical mi
 
 ## 🏛️ System Architecture
 
-![MPIS.ai System Architecture](Architecture.png)
+![MPIS.ai System Architecture](assets/mpis_architecture.png)
 
 The MPIS.ai architecture is structured across five decoupled, resilient layers:
 
