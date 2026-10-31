@@ -47,22 +47,37 @@ The MPIS.ai architecture is structured across five decoupled, resilient layers:
 ## 🔬 Mathematical Formulations
 
 ### 1. Visual Biometric Similarity ($S_{\text{face}}$)
+
 Normalized cosine similarity computed between the probe sighting embedding $\mathbf{v}_{\text{probe}} \in \mathbb{R}^{128}$ and gallery case embedding $\mathbf{v}_{\text{gallery}} \in \mathbb{R}^{128}$:
-$$S_{\text{face}} = \frac{1}{2} \left( 1 + \frac{\mathbf{v}_{\text{probe}} \cdot \mathbf{v}_{\text{gallery}}}{\|\mathbf{v}_{\text{probe}}\|_2 \|\mathbf{v}_{\text{gallery}}\|_2} \right)$$
+
+$$
+S_{\text{face}} = \frac{1}{2} \left( 1 + \frac{\mathbf{v}_{\text{probe}} \cdot \mathbf{v}_{\text{gallery}}}{\|\mathbf{v}_{\text{probe}}\|_2 \|\mathbf{v}_{\text{gallery}}\|_2} \right)
+$$
 
 ### 2. Dense Semantic NLP Similarity ($S_{\text{text}}$)
+
 Cosine similarity between sentence transformer dense embeddings $\mathbf{t}_{\text{probe}}, \mathbf{t}_{\text{gallery}} \in \mathbb{R}^{384}$:
-$$S_{\text{text}} = \frac{1}{2} \left( 1 + \frac{\mathbf{t}_{\text{probe}} \cdot \mathbf{t}_{\text{gallery}}}{\|\mathbf{t}_{\text{probe}}\|_2 \|\mathbf{t}_{\text{gallery}}\|_2} \right)$$
+
+$$
+S_{\text{text}} = \frac{1}{2} \left( 1 + \frac{\mathbf{t}_{\text{probe}} \cdot \mathbf{t}_{\text{gallery}}}{\|\mathbf{t}_{\text{probe}}\|_2 \|\mathbf{t}_{\text{gallery}}\|_2} \right)
+$$
 
 ### 3. Continuous Geodesic Proximity Decay ($S_{\text{geo}}$)
+
 Haversine ellipsoidal great-circle distance $d(\mathbf{x}_{\text{sighting}}, \mathbf{x}_{\text{last\_seen}})$ transformed via an exponential attenuation function with scale parameter $\lambda = 100\text{ km}$:
-$$S_{\text{geo}} = \exp\left( -\frac{d(\mathbf{x}_{\text{sighting}}, \mathbf{x}_{\text{last\_seen}})}{\lambda} \right)$$
+
+$$
+S_{\text{geo}} = \exp\left( -\frac{d(\mathbf{x}_{\text{sighting}}, \mathbf{x}_{\text{last\_seen}})}{\lambda} \right)
+$$
 
 ### 4. Mode A vs Mode B Fusion Strategy
-$$\begin{cases}
-S_{\text{composite}} = 0.60 \cdot S_{\text{face}} + 0.30 \cdot S_{\text{text}} + 0.10 \cdot S_{\text{geo}} & \text{if } au_{\text{face}} \ge 0.50 \text{ (Mode A: Standard)} \\
+
+$$
+\begin{cases}
+S_{\text{composite}} = 0.60 \cdot S_{\text{face}} + 0.30 \cdot S_{\text{text}} + 0.10 \cdot S_{\text{geo}} & \text{if } au_{\text{face}} \ge 0.50 \text{ (Mode A: Standard)} \\[8pt]
 S_{\text{composite}} = 0.00 \cdot S_{\text{face}} + 0.80 \cdot S_{\text{text}} + 0.20 \cdot S_{\text{geo}} & \text{if } au_{\text{face}} < 0.50 \text{ (Mode B: Fallback)}
-\end{cases}$$
+\end{cases}
+$$
 
 ---
 
