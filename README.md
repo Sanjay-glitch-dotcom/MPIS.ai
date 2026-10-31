@@ -48,7 +48,7 @@ The MPIS.ai architecture is structured across five decoupled, resilient layers:
 
 ### 1. Visual Biometric Similarity ($S_{\text{face}}$)
 
-Normalized cosine similarity computed between the probe sighting embedding $\mathbf{v}_{\text{probe}} \in \mathbb{R}^{128}$ and gallery case embedding $\mathbf{v}_{\text{gallery}} \in \mathbb{R}^{128}$:
+Normalized cosine similarity computed between the 128-dimensional probe sighting vector and gallery case embedding:
 
 $$
 S_{\text{face}} = \frac{1}{2} \left( 1 + \frac{\mathbf{v}_{\text{probe}} \cdot \mathbf{v}_{\text{gallery}}}{\|\mathbf{v}_{\text{probe}}\|_2 \|\mathbf{v}_{\text{gallery}}\|_2} \right)
@@ -56,7 +56,7 @@ $$
 
 ### 2. Dense Semantic NLP Similarity ($S_{\text{text}}$)
 
-Cosine similarity between sentence transformer dense embeddings $\mathbf{t}_{\text{probe}}, \mathbf{t}_{\text{gallery}} \in \mathbb{R}^{384}$:
+Cosine similarity computed between the 384-dimensional dense semantic text vectors:
 
 $$
 S_{\text{text}} = \frac{1}{2} \left( 1 + \frac{\mathbf{t}_{\text{probe}} \cdot \mathbf{t}_{\text{gallery}}}{\|\mathbf{t}_{\text{probe}}\|_2 \|\mathbf{t}_{\text{gallery}}\|_2} \right)
@@ -64,7 +64,7 @@ $$
 
 ### 3. Continuous Geodesic Proximity Decay ($S_{\text{geo}}$)
 
-Haversine ellipsoidal great-circle distance $d(\mathbf{x}_{\text{sighting}}, \mathbf{x}_{\text{case}})$ transformed via an exponential attenuation function with scale parameter $\lambda = 100\text{ km}$:
+Haversine ellipsoidal great-circle distance transformed via an exponential attenuation function with scale parameter $\lambda = 100\text{ km}$:
 
 $$
 S_{\text{geo}} = \exp\left( -\frac{d(\mathbf{x}_{\text{sighting}}, \mathbf{x}_{\text{case}})}{\lambda} \right)
