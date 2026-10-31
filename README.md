@@ -64,17 +64,17 @@ $$
 
 ### 3. Continuous Geodesic Proximity Decay ($S_{\text{geo}}$)
 
-Haversine ellipsoidal great-circle distance $d(\mathbf{x}_{\text{sighting}}, \mathbf{x}_{\text{last\_seen}})$ transformed via an exponential attenuation function with scale parameter $\lambda = 100\text{ km}$:
+Haversine ellipsoidal great-circle distance $d(\mathbf{x}_{\text{sighting}}, \mathbf{x}_{\text{case}})$ transformed via an exponential attenuation function with scale parameter $\lambda = 100\text{ km}$:
 
 $$
-S_{\text{geo}} = \exp\left( -\frac{d(\mathbf{x}_{\text{sighting}}, \mathbf{x}_{\text{last\_seen}})}{\lambda} \right)
+S_{\text{geo}} = \exp\left( -\frac{d(\mathbf{x}_{\text{sighting}}, \mathbf{x}_{\text{case}})}{\lambda} \right)
 $$
 
 ### 4. Mode A vs Mode B Fusion Strategy
 
 $$
 \begin{cases}
-S_{\text{composite}} = 0.60 \cdot S_{\text{face}} + 0.30 \cdot S_{\text{text}} + 0.10 \cdot S_{\text{geo}} & \text{if } au_{\text{face}} \ge 0.50 \text{ (Mode A: Standard)} \\[8pt]
+S_{\text{composite}} = 0.60 \cdot S_{\text{face}} + 0.30 \cdot S_{\text{text}} + 0.10 \cdot S_{\text{geo}} & \text{if } au_{\text{face}} \ge 0.50 \text{ (Mode A: Standard)} \\
 S_{\text{composite}} = 0.00 \cdot S_{\text{face}} + 0.80 \cdot S_{\text{text}} + 0.20 \cdot S_{\text{geo}} & \text{if } au_{\text{face}} < 0.50 \text{ (Mode B: Fallback)}
 \end{cases}
 $$
